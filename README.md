@@ -2,6 +2,10 @@ dview-skeleton-view
 ![Release](https://jitpack.io/v/dora4/dview-skeleton-view.svg)
 --------------------------------
 
+#### 卡片
+![DORA视图 视图法王的遗骸](https://github.com/user-attachments/assets/e34cfbf2-4764-463f-95e2-0aec29409ee4)
+![DORA视图 视图法王](https://github.com/user-attachments/assets/2d32c589-0a10-4655-a982-653b2d77f9f7)
+
 #### Gradle依赖配置
 
 ```groovy

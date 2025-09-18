@@ -20,3 +20,161 @@ dependencies {
     implementation 'com.github.dora4:dview-skeleton-view:1.0'
 }
 ```
+
+#### 使用方式
+布局文件。
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.SkeletonViewActivity">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPanelBg"
+        android:orientation="vertical">
+
+        <dora.widget.DoraTitleBar
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            app:dview_title="@string/common_title" />
+
+        <ViewStub
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/skeletonLayout"
+            android:layout="@layout/layout_skeleton_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- 圆形骨架 -->
+                <dora.widget.DoraSkeletonView
+                    android:id="@+id/skeletonCircle"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:dview_sv_animDuration="2000"
+                    app:dview_sv_primaryColor="@color/light_gray"
+                    app:dview_sv_secondaryColor="@color/white"
+                    app:dview_sv_shapeType="circle"
+                    app:dview_sv_shimmer="true" />
+
+                <dora.widget.DoraSkeletonView
+                    android:id="@+id/skeletonCircle2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    app:dview_sv_animDuration="2000"
+                    app:dview_sv_primaryColor="@color/light_gray"
+                    app:dview_sv_secondaryColor="@color/white"
+                    app:dview_sv_shapeType="circle"
+                    app:dview_sv_shimmer="true" />
+
+                <dora.widget.DoraSkeletonView
+                    android:id="@+id/skeletonCircle3"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    app:dview_sv_animDuration="2000"
+                    app:dview_sv_primaryColor="@color/light_gray"
+                    app:dview_sv_secondaryColor="@color/white"
+                    app:dview_sv_shapeType="circle"
+                    app:dview_sv_shimmer="true" />
+
+                <dora.widget.DoraSkeletonView
+                    android:id="@+id/skeletonCircle4"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    app:dview_sv_animDuration="2000"
+                    app:dview_sv_primaryColor="@color/light_gray"
+                    app:dview_sv_secondaryColor="@color/white"
+                    app:dview_sv_shapeType="circle"
+                    app:dview_sv_shimmer="true" />
+            </LinearLayout>
+
+            <!-- 矩形骨架 -->
+            <dora.widget.DoraSkeletonView
+                android:id="@+id/skeletonRect"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                app:dview_sv_animDuration="1500"
+                app:dview_sv_cornerRadius="16dp"
+                app:dview_sv_primaryColor="@color/light_gray"
+                app:dview_sv_secondaryColor="@color/white"
+                app:dview_sv_shapeType="rectangle"
+                app:dview_sv_shimmer="true" />
+
+            <dora.widget.DoraSkeletonView
+                android:id="@+id/skeletonRect2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                app:dview_sv_animDuration="1500"
+                app:dview_sv_cornerRadius="16dp"
+                app:dview_sv_primaryColor="@color/light_gray"
+                app:dview_sv_secondaryColor="@color/white"
+                app:dview_sv_shapeType="rectangle"
+                app:dview_sv_shimmer="true" />
+
+            <dora.widget.DoraSkeletonView
+                android:id="@+id/skeletonRect3"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                app:dview_sv_animDuration="1500"
+                app:dview_sv_cornerRadius="16dp"
+                app:dview_sv_primaryColor="@color/light_gray"
+                app:dview_sv_secondaryColor="@color/white"
+                app:dview_sv_shapeType="rectangle"
+                app:dview_sv_shimmer="true" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
+```
+Kotlin代码。
+```kt
+Handler(Looper.getMainLooper()).postDelayed({
+            // 1. inflate 正文内容
+            val inflated = binding.content.viewStub?.inflate()
+            inflated?.apply {
+                // 2. 设置圆形图片
+                findViewById<DoraCircleImageView>(R.id.civ1)
+                    .setImageResource(R.drawable.shape_circle_card1)
+                findViewById<DoraCircleImageView>(R.id.civ2)
+                    .setImageResource(R.drawable.shape_circle_card2)
+                findViewById<DoraCircleImageView>(R.id.civ3)
+                    .setImageResource(R.drawable.shape_circle_card3)
+                findViewById<DoraCircleImageView>(R.id.civ4)
+                    .setImageResource(R.drawable.shape_circle_card4)
+            }
+            // 3. 隐藏骨架屏
+            binding.skeletonCircle.visibility = View.GONE
+            binding.skeletonCircle2.visibility = View.GONE
+            binding.skeletonCircle3.visibility = View.GONE
+            binding.skeletonCircle4.visibility = View.GONE
+            binding.skeletonRect.visibility = View.GONE
+            binding.skeletonRect2.visibility = View.GONE
+            binding.skeletonRect3.visibility = View.GONE
+        }, 1000)
+```
